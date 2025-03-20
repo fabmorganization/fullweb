@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_REPO = 'https://github.com/TiendaAndroid/tienda-completa-web.git'
+        GIT_REPO = 'https://github.com/fabmorganization/fullweb.git'
     }
 
     stages {
@@ -15,7 +15,7 @@ pipeline {
         stage('Clone Repository with Submodules') {
             steps {
                 sh "git clone --recurse-submodules ${env.GIT_REPO}"
-                dir('tienda-completa-web') {
+                dir('fullweb') {
                     sh 'git submodule update --init --recursive'
                 }
             }
@@ -23,7 +23,7 @@ pipeline {
 
         stage('Stop Running Containers') {
             steps {
-                dir('tienda-completa-web') {
+                dir('fullweb') {
                     sh 'docker-compose down'
                 }
             }
@@ -31,7 +31,7 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                dir('tienda-completa-web') {
+                dir('fullweb') {
                     sh 'docker-compose build'
                 }
             }
@@ -39,7 +39,7 @@ pipeline {
 
         stage('Build App') {
             steps {
-                dir('tienda-completa-web') {
+                dir('fullweb') {
                     sh 'docker-compose up -d'
                 }
             }
