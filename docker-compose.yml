@@ -19,10 +19,10 @@ services:
       - ./backend_web/src:/app/src
     ports:
       - 4001:4001
-    command: npm run start:dev
+    command: sh -c "npm run build && npm run start"
     environment:
       - PORT=4001
-      - SERVER_URL=http://localhost:4001
+      - SERVER_URL=https://www.fabm.online
       - PREFIX=/backend_signlink/api
       - EMAIL=fbonillamontalvo@gmail.com
       - PASS_EMAIL=lcwp ojvl mdwl yjvp
